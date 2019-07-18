@@ -41,7 +41,7 @@ tbody td {border-left: 1px dotted #ddd;}
 td, th {font-size: 14px;padding: 10px 16px;text-align: left;}
 dt {font-size: 16px;}
 dd {font-size: 16px;}
-.color-scheme-dark {background-color: #3c3c3f;color: #cbcec9;}
+.color-scheme-dark {background-color: #1d1f21;color: #cbcec9;}
 .color-scheme-dark #site-wrapper {}
 .color-scheme-dark.single p.site-description {color: #999;}
 .color-scheme-dark .site-footer .site-info {border-top: 1px solid #4a4a4a;color: #999;}
@@ -50,12 +50,12 @@ dd {font-size: 16px;}
 .color-scheme-dark .sidebar a {color: #d6d6d6;border-bottom: 1px solid #555;}
 .color-scheme-dark .sidebar a:hover {color: #fff;border-bottom: 1px solid #fff;}
 .color-scheme-dark a:hover, .color-scheme-dark a:focus, .color-scheme-dark a:active {color: #fff;border-bottom: 1px solid #fff;}
-.color-scheme-dark .site-title a {color: #fff;}
+.color-scheme-dark .site-title a {color: #2bbc8a;}
 .color-scheme-dark .entry-list .cat-links {color: #666;}
 .color-scheme-dark .entry-list .cat-links a {border-width: 0;color: #888;text-transform: uppercase;}
 .color-scheme-dark h1, .color-scheme-dark .entry-content h2, .color-scheme-dark .entry-content h3, .color-scheme-dark dt {color: #fff;}
 .color-scheme-dark .entry-content h4 {color: #ccc;}
-.color-scheme-dark h2.entry-title a {color: #fff;border-bottom-color: #666;}
+.color-scheme-dark h2.entry-title a {color: #2bbc8a;border-bottom-color: #666;}
 .color-scheme-dark h2.entry-title a:hover {color: #fff;border-bottom-color: #fff;}
 .color-scheme-dark .entry-list .page-content, .color-scheme-dark .entry-list .entry-content, .color-scheme-dark .entry-list .entry-summary {color: #ddd;}
 .color-scheme-dark .post-thumbnail img, .color-scheme-dark figure.wp-caption, .color-scheme-dark .entry-content img.size-large {box-shadow: 0 0 28px rgba(0,0,0,.5);}
@@ -195,7 +195,7 @@ p.site-description {margin: 0;font-size: 14px;display: inline-block;font-weight:
 .widget {font-weight: 100;}
 .widget, .main-navigation {margin: 0 0 4em 0;}
 .widget select {max-width: 100%;}
-.widget h2 {color: #666;font-weight: normal;font-size: 16px;text-transform: uppercase;}
+.widget h2 {color: #2bbc8a;font-weight: normal;font-size: 16px;text-transform: uppercase;}
 .widget ul, .widget .menu {margin: 0;padding: 0;}
 .widget li {list-style: none;margin: 10px 0;padding: 0;}
 .post .after-entry-widgets {margin: 40px 0 100px;max-width: 400px;}
