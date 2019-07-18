@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Windows – DefensiveSec</title>
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+
+
+
+<link rel="stylesheet" id="wp-block-library-css" href="https://www.defensivesec.net/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="burger-factory-fonts-css" href="//fonts.googleapis.com/css?family=Roboto%3A300%2C400%2C400i%2C500%2C500i&ver=5.2.2" type="text/css" media="all">
+<link rel="stylesheet" id="burger-factory-style-css" href="https://www.defensivesec.net/wp-content/themes/burger-factory/style.css" type="text/css" media="all">
+
+
+
+		<style>
+			.post-navigation .nav-previous::after
+			{
+				content: "Previous";
+			}
+			.post-navigation .nav-next::after
+			{
+				content: "Next";
+			}
+
+			p.site-description, .intro { color: #ffffff; }
+			.sticky { border-left-color: #ffffff; }
+
+			.front-page-category, .single .entry-meta, .single .entry-meta a { color: #00bca3; }
+		</style>
+	<link rel="icon" href="https://www.defensivesec.net/wp-content/uploads/2019/07/logo-150x150.png" sizes="32x32">
+<link rel="icon" href="https://www.defensivesec.net/wp-content/uploads/2019/07/logo.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://www.defensivesec.net/wp-content/uploads/2019/07/logo.png">
+<meta name="msapplication-TileImage" content="https://www.defensivesec.net/wp-content/uploads/2019/07/logo.png">
+</head>
+
+<body class="archive category category-windows category-5 color-scheme-dark">
+	<div id="site-wrapper">
+	<div id="page" class="site container">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="row site-header" role="banner">
+			<div class="col-12">
+									<p class="site-title"><a href="https://www.defensivesec.net/" rel="home">DefensiveSec</a></p>
+									<p class="site-description">Just another WordPress site</p>
+							</div>
+		</header>
+
+		<div id="content" class="site-content">
+            
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main row" role="main">
+
+		<div class="col-3 sidebar">
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+    <div id="primary-menu" class="menu"><ul>
+<li class="page_item page-item-2"><a href="https://www.defensivesec.net/sample-page/">Sample Page</a></li>
+</ul></div>
+</nav>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.defensivesec.net/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section>		<section id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widget-title">Recent Posts</h2>		<ul>
+											<li>
+					<a href="https://www.defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/">Disappearing Windows 10 Event Logs After Feature Update</a>
+									</li>
+					</ul>
+		</section><section id="archives-2" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+				<li><a href="https://www.defensivesec.net/2019/07/">July 2019</a></li>
+		</ul>
+			</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">Categories</h2>		<ul>
+				<li class="cat-item cat-item-3"><a href="https://www.defensivesec.net/category/dfir/">DFIR</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://www.defensivesec.net/category/endpoint/">Endpoint</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://www.defensivesec.net/category/logging/">Logging</a>
+</li>
+	<li class="cat-item cat-item-5 current-cat"><a href="https://www.defensivesec.net/category/windows/">Windows</a>
+</li>
+		</ul>
+			</section></aside>		</div>
+
+		<div class="col-9 archive-entry-list">
+
+		
+							<header class="page-header">
+				<h1 class="front-page-category">Category: Windows</h1>				</header>
+			
+			<div class="entry-list">
+									<article id="post-9" class="post-9 post type-post status-publish format-standard hentry category-dfir category-endpoint category-logging category-windows">
+						<header class="entry-header">
+							<h2 class="entry-title">
+							<a href="https://www.defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/" rel="bookmark">Disappearing Windows 10 Event Logs After Feature Update</a>							</h2>
+														<div class="entry-meta">
+								<span class="cat-links"><a href="https://www.defensivesec.net/category/dfir/" rel="category tag">DFIR</a>, <a href="https://www.defensivesec.net/category/endpoint/" rel="category tag">Endpoint</a>, <a href="https://www.defensivesec.net/category/logging/" rel="category tag">Logging</a>, <a href="https://www.defensivesec.net/category/windows/" rel="category tag">Windows</a></span>							</div>
+													</header>
+
+						<div class="entry-summary">
+							
+<p>I’ve recently read a few tweets stating that Windows 10 is blowing away log files after installing feature updates (such as the latest Fall Creators update). While at first glance, this may seem to be the case, it’s actually a false statement. I believe this misconceptions stems from the fact that many don’t know that feature update is NOT a patch or service pack like the OS’s prior to Windows 10. Instead, it is an entire OS upgrade. What’s really happening is that new event logs are being created, but your old event logs are still accessible.</p>
+
+
+
+<ol><li>When a feature update is performed, Windows creates a backup of your previous build in <strong>C:\windows.old</strong></li><li>All of the previous event log files are available in <strong>C:\windows.old\windows\system32\winevt\logs</strong></li><li>In an enterprise enviroment, feature updates are typically scripted and not left to the automatic updating process built into Windows</li><li>To prevent from losing historic event logs, a sysadmin could easily run a post-update script to copy those old event logs to a more permanent location. Maybe something like <strong>C:\windows\system32\winevt\logs\previous build</strong></li></ol>
+
+
+
+<p>Here’s a little screenshot as proof that the event logs remain after a feature update:</p>
+
+
+
+<figure class="wp-block-image"><img src="https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png" alt="" class="wp-image-10" srcset="https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png 743w,https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update-300x115.png 300w" sizes="(max-width: 743px) 100vw, 743px"></figure>
+						</div>
+					</article>
+							</div>
+
+					</div>
+
+		</main>
+	</div>
+
+        
+	</div>
+
+	<footer id="colophon" class="site-footer row" role="contentinfo">
+		<div class="col-3">
+		</div>
+		<div class="col-9 site-info">
+			<p></p>
+			<p class="theme-by really-small"><a href="https://anguswoodman.com/simple-wordpress-themes" rel="designer">Theme by Angus Woodman</a></p>
+		</div>
+	</footer>
+</div>
+
+
+</div></body>
+</html>

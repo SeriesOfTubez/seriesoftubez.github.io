@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>DefensiveSec</title>
+	<atom:link href="https://www.defensivesec.net/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.defensivesec.net/</link>
+	<description>Just another WordPress site</description>
+	<lastBuildDate>Thu, 18 Jul 2019 02:01:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.2.2</generator>
+
+<image>
+	<url>https://www.defensivesec.net/wp-content/uploads/2019/07/logo-150x150.png</url>
+	<title>DefensiveSec</title>
+	<link>http://www.defensivesec.net/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Disappearing Windows 10 Event Logs After Feature Update</title>
+		<link>https://www.defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/</link>
+				<pubDate>Thu, 18 Jul 2019 02:01:09 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[DFIR]]></category>
+		<category><![CDATA[Endpoint]]></category>
+		<category><![CDATA[Logging]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">https://www.defensivesec.net/?p=9</guid>
+				<description><![CDATA[I’ve recently read a few tweets stating that Windows 10 is blowing away log files after installing feature updates (such as the latest Fall Creators update). While at first glance, this may seem to be the case, it’s actually a false statement.&#160;I believe this misconceptions stems from the fact that many don’t know that feature [&#8230;]]]></description>
+								<content:encoded><![CDATA[
+<p>I’ve recently read a few tweets stating that Windows 10 is blowing away log files after installing feature updates (such as the latest Fall Creators update). While at first glance, this may seem to be the case, it’s actually a false statement.&nbsp;I believe this misconceptions stems from the fact that many don’t know that feature update is NOT a patch or service pack like the OS’s prior to Windows 10. Instead, it is an entire OS upgrade. What’s really happening is that new event logs are being created, but your old event logs are still accessible.</p>
+
+
+
+<ol><li>When a feature update is performed, Windows creates a backup of your previous build in&nbsp;<strong>C:\windows.old</strong></li><li>All of the previous event log files are available in&nbsp;<strong>C:\windows.old\windows\system32\winevt\logs</strong></li><li>In an enterprise enviroment, feature updates are typically scripted and not left to the automatic updating process built into Windows</li><li>To prevent from losing historic event logs, a sysadmin could easily run a post-update script to copy those old event logs to a more permanent location. Maybe something like&nbsp;<strong>C:\windows\system32\winevt\logs\previous build</strong></li></ol>
+
+
+
+<p>Here’s a little screenshot as proof that the event logs remain after a feature update:</p>
+
+
+
+<figure class="wp-block-image"><img src="https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png" alt="" class="wp-image-10" srcset="https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png 743w, https://www.defensivesec.net/wp-content/uploads/2019/07/evtx-post-update-300x115.png 300w" sizes="(max-width: 743px) 100vw, 743px" /></figure>
+]]></content:encoded>
+										</item>
+	</channel>
+</rss>
