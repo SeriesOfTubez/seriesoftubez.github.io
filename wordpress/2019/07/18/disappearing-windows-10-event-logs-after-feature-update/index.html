@@ -4,7 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Disappearing Windows 10 Event Logs After Feature Update – DefensiveSec</title>
+<title>Disappearing Windows 10 Event Logs After Feature Update - DefensiveSec</title>
+
+
+
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Disappearing Windows 10 Event Logs After Feature Update - DefensiveSec">
+<meta property="og:description" content="I’ve recently read a few tweets stating that Windows 10 is blowing away log files after installing feature updates (such as the latest Fall Creators update). While at first glance, this may seem to be the case, it’s actually a false statement. I believe this misconceptions stems from the fact that many don’t know that feature …">
+<meta property="og:url" content="https://defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/">
+<meta property="og:site_name" content="DefensiveSec">
+<meta property="article:section" content="DFIR">
+<meta property="article:published_time" content="2019-07-18T02:01:09+00:00">
+<meta property="og:image" content="https://defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="I’ve recently read a few tweets stating that Windows 10 is blowing away log files after installing feature updates (such as the latest Fall Creators update). While at first glance, this may seem to be the case, it’s actually a false statement. I believe this misconceptions stems from the fact that many don’t know that feature […]">
+<meta name="twitter:title" content="Disappearing Windows 10 Event Logs After Feature Update - DefensiveSec">
+<meta name="twitter:image" content="https://defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png">
+<script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://defensivesec.net/#website",
+            "url": "https://defensivesec.net/",
+            "name": "DefensiveSec",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://defensivesec.net/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "@id": "https://defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/#primaryimage",
+            "url": "https://defensivesec.net/wp-content/uploads/2019/07/evtx-post-update.png",
+            "width": 743,
+            "height": 285
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/#webpage",
+            "url": "https://defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/",
+            "inLanguage": "en-US",
+            "name": "Disappearing Windows 10 Event Logs After Feature Update - DefensiveSec",
+            "isPartOf": {
+                "@id": "https://defensivesec.net/#website"
+            },
+            "primaryImageOfPage": {
+                "@id": "https://defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/#primaryimage"
+            },
+            "datePublished": "2019-07-18T02:01:09+00:00",
+            "dateModified": "2019-07-18T02:01:09+00:00",
+            "author": {
+                "@id": "https://defensivesec.net/#/schema/person/c111ab8481f2eb50c06ae19d536292ec"
+            }
+        },
+        {
+            "@type": [
+                "Person"
+            ],
+            "@id": "https://defensivesec.net/#/schema/person/c111ab8481f2eb50c06ae19d536292ec",
+            "name": "admin",
+            "sameAs": []
+        }
+    ]
+}</script>
+
+
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//s.w.org">
 
@@ -12,8 +79,6 @@
 <link rel="stylesheet" id="wp-block-library-css" href="https://defensivesec.net/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
 <link rel="stylesheet" id="burger-factory-fonts-css" href="//fonts.googleapis.com/css?family=Roboto%3A300%2C400%2C400i%2C500%2C500i&ver=5.2.2" type="text/css" media="all">
 <link rel="stylesheet" id="burger-factory-style-css" href="https://defensivesec.net/wp-content/themes/burger-factory/style.css" type="text/css" media="all">
-
-
 
 
 
