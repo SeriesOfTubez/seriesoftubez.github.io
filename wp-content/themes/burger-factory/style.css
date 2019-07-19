@@ -60,7 +60,7 @@ dd {font-size: 16px;}
 .color-scheme-dark .entry-list .page-content, .color-scheme-dark .entry-list .entry-content, .color-scheme-dark .entry-list .entry-summary {color: #ddd;}
 .color-scheme-dark .post-thumbnail img, .color-scheme-dark figure.wp-caption, .color-scheme-dark .entry-content img.size-large {box-shadow: 0 0 28px rgba(0,0,0,.5);}
 .color-scheme-dark mark, .color-scheme-dark ins {background: rgba(0,0,0,.3);text-decoration: none;padding: 6px;}
-.color-scheme-dark code {background-color: #882424;}
+.color-scheme-dark code {}
 .color-scheme-dark kbd, .color-scheme-dark pre, .color-scheme-dark samp, .color-scheme-dark var {background-color: #2f2f2f;}
 .color-scheme-dark hr {background-color: #444;}
 .color-scheme-dark button, .color-scheme-dark input, .color-scheme-dark select, .color-scheme-dark textarea {color: #fff;background-color: #2f2f2f;border: 1px solid #000;}

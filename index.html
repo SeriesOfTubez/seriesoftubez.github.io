@@ -61,6 +61,9 @@
 <aside id="secondary" class="widget-area" role="complementary">
 			<section id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widget-title">Recent Posts</h2>		<ul>
 											<li>
+					<a href="http://www.defensivesec.net/2019/07/18/automating-azure-ad-b2b-invites-with-approval-workflow/">Automating Azure AD B2B Invites with Approval Workflow</a>
+									</li>
+											<li>
 					<a href="http://www.defensivesec.net/2019/07/18/disappearing-windows-10-event-logs-after-feature-update/">Disappearing Windows 10 Event Logs After Feature Update</a>
 									</li>
 					</ul>
@@ -68,11 +71,19 @@
 				<li><a href="http://www.defensivesec.net/2019/07/">July 2019</a></li>
 		</ul>
 			</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">Categories</h2>		<ul>
-				<li class="cat-item cat-item-3"><a href="http://www.defensivesec.net/category/dfir/">DFIR</a>
+				<li class="cat-item cat-item-7"><a href="http://www.defensivesec.net/category/automation/">Automation</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.defensivesec.net/category/azure/">Azure</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.defensivesec.net/category/azure/azure-ad/">Azure AD</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.defensivesec.net/category/dfir/">DFIR</a>
 </li>
 	<li class="cat-item cat-item-4"><a href="http://www.defensivesec.net/category/endpoint/">Endpoint</a>
 </li>
 	<li class="cat-item cat-item-2"><a href="http://www.defensivesec.net/category/logging/">Logging</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.defensivesec.net/category/o365/">O365</a>
 </li>
 	<li class="cat-item cat-item-5"><a href="http://www.defensivesec.net/category/windows/">Windows</a>
 </li>
@@ -84,6 +95,185 @@
 		
 			
 			<div class="entry-list">
+									<article id="post-18" class="post-18 post type-post status-publish format-standard hentry category-automation category-azure category-azure-ad category-o365">
+						<header class="entry-header">
+							<h2 class="entry-title">
+							<a href="http://www.defensivesec.net/2019/07/18/automating-azure-ad-b2b-invites-with-approval-workflow/" rel="bookmark">Automating Azure AD B2B Invites with Approval Workflow</a>							</h2>
+														<div class="entry-meta">
+								<span class="cat-links"><a href="http://www.defensivesec.net/category/automation/" rel="category tag">Automation</a>, <a href="http://www.defensivesec.net/category/azure/" rel="category tag">Azure</a>, <a href="http://www.defensivesec.net/category/azure/azure-ad/" rel="category tag">Azure AD</a>, <a href="http://www.defensivesec.net/category/o365/" rel="category tag">O365</a></span>							</div>
+													</header>
+
+						<div class="entry-summary">
+							
+<h2>The Problem</h2>
+
+
+
+<p>Users want to collaborate with external parties.  You have a few options to accomplish this:<br></p>
+
+
+
+<ul><li>Share anonymously</li><li>Share with any authenticated user</li><li>Share with existing authenticated user</li><li>Share with organization only</li></ul>
+
+
+
+<p>None of these work well when security and scale are required. </p>
+
+
+
+<p>The best of both worlds would be to allow your end users to request access for an external user and then to kick off an approval workflow.  If approved by the appropriate parties, a B2B invite will be automatically sent to the desired email address.  Once invited, the user can then share with that account.  This is assuming you have your org configured so sharing is only possible with existing external accounts.</p>
+
+
+
+<h2>The Solution</h2>
+
+
+
+<p>With an Office 365 subscription, you get a product called Microsoft Flow.  Most people just equate this to being Microsoft’s attempt at creating an <a href="https://ifttt.com/">IFTT</a> knock off.  However, it’s so much more than that.  You can, in essence, build out an entirely server-less API that you can interact with.  It’s much closer to Azure Functions or Azure Logic Apps than IFTT.</p>
+
+
+
+<p>In this blog post, I’m going to walk you through creating a Flow with an approval process to automatically add B2B users to your Azure AD tenant.  Let’s go!</p>
+
+
+
+<h3>Initial Trigger</h3>
+
+
+
+<p>In order to make our Flow run, we want a trigger that provides it with input.  There are many ways to do this, but I’m using a Microsoft Form (also part of O365).  When the form is submitted, the flow will grab the values and do “stuff” with it.</p>
+
+
+
+<p>First, go to the Forms app from https://portal.office.com (or just go to https://forms.office.com).  Once there, click the button to create a new form.  You can build your form to request whatever information you’d like.  Here’s what I have and use in my Flow.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0046.png" alt="" class="wp-image-23" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0046.png 763w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0046-273x300.png 273w" sizes="(max-width: 763px) 100vw, 763px"></figure></div>
+
+
+
+<p>Now that the form is created, lets move over to Flow to get to the meat and taters.  Buckle up, it’s a bit lengthy.</p>
+
+
+
+<h3>Flow Build</h3>
+
+
+
+<p>Head on over to https://portal.office.com again and find the Flow app.  If you don’t see it, make sure you have the license assigned.</p>
+
+
+
+<p style="color:#2bbc8a" class="has-text-color">NOTE: For security reasons, you should create a new Flow Environment to create this (and future) Flows in.  This will allow you to control who in your organization can access and run the Flow.  Otherwise, everyone in your org can potentially be given access to view the Flow.</p>
+
+
+
+<p>Create a new <strong>Automated – from Blank</strong> Flow</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0049.png" alt="" class="wp-image-25" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0049.png 445w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0049-300x175.png 300w" sizes="(max-width: 445px) 100vw, 445px"></figure>
+
+
+
+<p>Now fill out the Flow name and choose the <strong>When a new response is submitted</strong> option as the initial trigger.</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0048.png" alt="" class="wp-image-26" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0048.png 415w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0048-300x257.png 300w" sizes="(max-width: 415px) 100vw, 415px"></figure>
+
+
+
+<p>Once you have created the empty Flow, choose the Form that you created in the trigger.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0045.png" alt="" class="wp-image-27" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0045.png 623w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0045-300x53.png 300w" sizes="(max-width: 623px) 100vw, 623px"></figure></div>
+
+
+
+<p>Before we can continue, we need to hop over to Azure AD to register an App, grant it permissions and generate a secret (password) that we can use in our Flow for programmatically interacting with Azure AD.</p>
+
+
+
+<p>Head over to https://portal.azure.com –> Azure Active Directory</p>
+
+
+
+<p>Now go to App Registrations</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0050.png" alt="" class="wp-image-30"></figure>
+
+
+
+<p>Click on <strong>New Registration</strong> and fill out the details</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0044.png" alt="" class="wp-image-31" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0044.png 704w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0044-300x219.png 300w" sizes="(max-width: 704px) 100vw, 704px"></figure>
+
+
+
+<p>Once created, save the Application ID and Tenant ID for later</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0043.png" alt="" class="wp-image-32" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0043.png 413w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0043-300x96.png 300w" sizes="(max-width: 413px) 100vw, 413px"></figure>
+
+
+
+<p>Now we need to assign the App some permissions.  It only needs enough access to perform the actions required.  Step through the screenshots below to setup the App permissions.</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0042.png" alt="" class="wp-image-33"><figcaption>Add API permissions to the app so it can interact programatically </figcaption></figure>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0041.png" alt="" class="wp-image-34" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0041.png 760w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0041-300x90.png 300w" sizes="(max-width: 760px) 100vw, 760px"><figcaption>Microsoft Graph is the API used for interacting with Azure AD</figcaption></figure>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0040.png" alt="" class="wp-image-35" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0040.png 798w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0040-300x75.png 300w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0040-768x192.png 768w" sizes="(max-width: 798px) 100vw, 798px"><figcaption>Use Application permissions so this can operate without user interaction.</figcaption></figure>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0039-1.png" alt="" class="wp-image-69"><figcaption>Grant these permissions to the app.  The User.Read is there by default.</figcaption></figure>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0037.png" alt="" class="wp-image-37" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0037.png 671w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0037-300x52.png 300w" sizes="(max-width: 671px) 100vw, 671px"><figcaption>Grant consent for all users (otherwise this won’t work)</figcaption></figure>
+
+
+
+<p>Ok – Now that the permissions are squared away, lets create a secret that we can use to authenticate with.  Go to <strong>Clients and Secrets</strong> in the app.</p>
+
+
+
+<p>Create a new Client Secret</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0035.png" alt="" class="wp-image-38" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0035.png 802w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0035-300x37.png 300w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0035-768x96.png 768w" sizes="(max-width: 802px) 100vw, 802px"></figure>
+
+
+
+<p>Give it a meaningful description and choose an expiration time that meets your requirements.  Just know the Flow will break will the secret expires until you generate a new one and update the Flow.  Make sure you copy the secret for use later (keep it somewhere secure like a password manager)</p>
+
+
+
+<figure class="wp-block-image"><img src="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0033.png" alt="" class="wp-image-39" srcset="http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0033.png 766w,http://www.defensivesec.net/wp-content/uploads/2019/07/GuestUser-0033-300x32.png 300w" sizes="(max-width: 766px) 100vw, 766px"></figure>
+
+
+
+<p>Head on over to page two for more…</p>
+
+
+<p class="post-nav-links">Pages: <a href="http://www.defensivesec.net/2019/07/18/automating-azure-ad-b2b-invites-with-approval-workflow/" class="post-page-numbers">1</a> <a href="http://www.defensivesec.net/2019/07/18/automating-azure-ad-b2b-invites-with-approval-workflow/2/" class="post-page-numbers">2</a> <a href="http://www.defensivesec.net/2019/07/18/automating-azure-ad-b2b-invites-with-approval-workflow/3/" class="post-page-numbers">3</a></p>						</div>
+					</article>
 									<article id="post-9" class="post-9 post type-post status-publish format-standard hentry category-dfir category-endpoint category-logging category-windows">
 						<header class="entry-header">
 							<h2 class="entry-title">
